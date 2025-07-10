@@ -44,6 +44,17 @@ app.get('/', (req, res) => {
   res.send('Express MVC server is running 🚀');
 });
 
+function keepServerAwake() {
+  setInterval(async () => {
+    try {
+      const res = await fetch("https://bytewiseserver.onrender.com/"); // Replace with your Render URL
+      console.log("Pinged self to prevent sleep");
+    } catch (err) {
+      console.error("Ping failed:", err.message);
+    }
+  }, 5 * 60 * 1000);
+}  
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
